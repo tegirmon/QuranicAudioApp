@@ -2,6 +2,7 @@ package com.quran.audio.app.ui.navigation
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -24,6 +25,11 @@ fun MainNavGraph(
     mainViewModel: MainViewModel,
     playerActions: MediaPlayerActions
 ) {
+    LaunchedEffect(Unit, block = {
+        mainViewModel.getSectionList()
+        mainViewModel.getReciterList()
+        mainViewModel.getSuraList()
+    })
     NavHost(navController, Screen.Home.route) {
         composable(Screen.Home.route) {
             Home(actions, mainViewModel)
