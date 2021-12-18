@@ -32,9 +32,9 @@ fun Home(actions: MainActions, viewModel: MainViewModel) {
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
-fun SuraView(actions: MainActions, viewModel: MainViewModel, reciterRelativePath: String?) {
+fun SuraView(actions: MainActions, viewModel: MainViewModel) {
     Column {
-        SuraList(actions, viewModel, reciterRelativePath)
+        SuraList(actions, viewModel)
         Spacer(modifier = Modifier.requiredHeight(8.dp))
     }
 }

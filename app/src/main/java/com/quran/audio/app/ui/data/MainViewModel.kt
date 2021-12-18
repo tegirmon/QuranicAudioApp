@@ -5,6 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quran.audio.api.client.model.Reciter
@@ -29,6 +31,20 @@ class MainViewModel(private val dataSource: DataSource) : ViewModel() {
     private val _suraList = mutableStateListOf<Sura>()
     val suraList: List<Sura>
         get() = _suraList
+
+    private var _selectedReciter: MutableLiveData<ReciterSelected> = MutableLiveData(ReciterSelected())
+    val selectedReciter: LiveData<ReciterSelected> = _selectedReciter
+
+    private var _selectedSura: MutableLiveData<SuraSelected> = MutableLiveData(SuraSelected())
+    val selectedSura: LiveData<SuraSelected> = _selectedSura
+
+    fun selectReciter(reciter: Reciter) {
+        _selectedReciter.value = ReciterSelected(reciter)
+    }
+
+    fun selectSura(sura: Sura) {
+        _selectedSura.value = SuraSelected(sura)
+    }
 
     fun getReciterList() {
         viewModelScope.launch {

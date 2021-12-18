@@ -31,21 +31,26 @@ fun ReciterList(actions: MainActions, viewModel: MainViewModel, sectionId: Int) 
 
     LazyColumn {
         items(viewModel.reciterList.filter { it.sectionId == sectionId }) { item ->
-            ReciterRow(actions, item)
+            ReciterRow(item,
+                onClick = {
+                    viewModel.selectReciter(it)
+                    actions.suraViewScreen()
+                }
+            )
         }
     }
 }
 
 @ExperimentalMaterialApi
 @Composable
-fun ReciterRow(actions: MainActions, reciter: Reciter) {
+fun ReciterRow(reciter: Reciter, onClick: (Reciter) -> Unit) {
     Card(
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth(),
         shape = RoundedCornerShape(2.dp),
         elevation = 2.dp,
-        onClick = { actions.suraViewScreen(reciter.relativePath) }
+        onClick = { onClick(reciter) }
     ) {
         Column(
             modifier = Modifier

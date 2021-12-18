@@ -15,15 +15,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.quran.audio.app.ui.data.ReciterSelected
+import com.quran.audio.app.ui.data.SuraSelected
 
 @Composable
-fun MediaPlayer(
-    title: String,
-    playerActions: PlayerActions,
-    @DrawableRes img: Int,
-    reciterRelativePath: String?,
-    suraId: Int
-) {
+fun MediaPlayer(playerActions: PlayerActions, @DrawableRes img: Int, reciterSelected: ReciterSelected, suraSelected: SuraSelected) {
     Column(
         Modifier
             .background(MaterialTheme.colors.background)
@@ -31,11 +27,15 @@ fun MediaPlayer(
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
+        val relativePath = reciterSelected.reciter?.relativePath
+        val suraId = suraSelected.sura?.id ?: 0
+        val title = "${reciterSelected.reciter?.name} - ${suraSelected.sura?.name?.simple}"
+
         PlayerImage(img)
         Spacer(Modifier.height(32.dp))
         PlayerTitle(title)
         Spacer(Modifier.height(16.dp))
-        PlayerControls(playerActions, reciterRelativePath, suraId)
+        PlayerControls(playerActions, relativePath, suraId)
     }
 }
 

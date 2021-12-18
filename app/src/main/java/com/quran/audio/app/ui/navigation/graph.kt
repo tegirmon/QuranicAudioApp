@@ -2,6 +2,7 @@ package com.quran.audio.app.ui.navigation
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,6 +12,9 @@ import com.quran.audio.app.R
 import com.quran.audio.app.ui.media.MediaPlayer
 import com.quran.audio.app.ui.media.MediaPlayerActions
 import com.quran.audio.app.ui.data.MainViewModel
+import com.quran.audio.app.ui.data.ReciterSelected
+import com.quran.audio.app.ui.data.SuraSelected
+import androidx.compose.runtime.livedata.observeAsState
 
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
@@ -21,38 +25,17 @@ fun MainNavGraph(
     mainViewModel: MainViewModel,
     player: ExoPlayer
 ) {
-    NavHost(
-        navController = navController,
-        startDestination = Screen.Home.route
-    ) {
+    NavHost(navController, Screen.Home.route) {
         composable(Screen.Home.route) {
-            Home(
-                actions,
-                mainViewModel
-            )
+            Home(actions, mainViewModel)
         }
-        composable(
-            Screen.SuraList.route
-        ) { backStackEntry ->
-            val arguments = requireNotNull(backStackEntry.arguments)
-            SuraView(
-                actions,
-                mainViewModel,
-                arguments.getString(NavArgs.RECITER_RELATIVE_PATH)
-            )
+        composable(Screen.SuraList.route) {
+            SuraView(actions, mainViewModel)
         }
-        composable(Screen.Player.route) { backStackEntry ->
-            val arguments = requireNotNull(backStackEntry.arguments)
-            val reciterRelativePath =
-                arguments.getString(NavArgs.RECITER_RELATIVE_PATH)
-            val suraId = arguments.getInt(NavArgs.SURA_ID)
-            MediaPlayer(
-                "$reciterRelativePath - $suraId",
-                MediaPlayerActions(player),
-                R.drawable.islamic_art,
-                reciterRelativePath,
-                suraId
-            )
+        composable(Screen.Player.route) {
+            val reciterSelected by mainViewModel.selectedReciter.observeAsState(ReciterSelected())
+            val suraSelected by mainViewModel.selectedSura.observeAsState(SuraSelected())
+            MediaPlayer(MediaPlayerActions(player), R.drawable.islamic_art, reciterSelected, suraSelected)
         }
     }
 }

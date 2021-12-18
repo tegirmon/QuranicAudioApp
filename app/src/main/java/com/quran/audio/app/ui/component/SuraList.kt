@@ -24,21 +24,26 @@ import com.quran.audio.app.ui.data.MainViewModel
 
 @ExperimentalMaterialApi
 @Composable
-fun SuraList(actions: MainActions, viewModel: MainViewModel, reciterRelativePath: String?) {
+fun SuraList(actions: MainActions, viewModel: MainViewModel) {
     LaunchedEffect(Unit, block = {
         viewModel.getSuraList()
     })
 
     LazyColumn {
         items(viewModel.suraList) { item ->
-            SuraRow(item, actions, reciterRelativePath)
+            SuraRow(item,
+                onClick = {
+                    viewModel.selectSura(it)
+                    actions.mediaPlayerView()
+                }
+            )
         }
     }
 }
 
 @ExperimentalMaterialApi
 @Composable
-fun SuraRow(sura: Sura, actions: MainActions, reciterRelativePath: String?) {
+fun SuraRow(sura: Sura, onClick: (Sura) -> Unit) {
     Card(
         modifier = Modifier
             .padding(4.dp)
@@ -46,7 +51,7 @@ fun SuraRow(sura: Sura, actions: MainActions, reciterRelativePath: String?) {
         shape = RoundedCornerShape(2.dp),
         elevation = 2.dp,
         onClick = {
-            actions.mediaPlayerView(reciterRelativePath ?: "", sura.id)
+            onClick(sura)
         }
     ) {
         Column(
