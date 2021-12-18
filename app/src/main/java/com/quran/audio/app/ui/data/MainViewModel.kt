@@ -13,9 +13,10 @@ import com.quran.audio.api.client.model.Reciter
 import com.quran.audio.api.client.model.Section
 import com.quran.audio.api.client.model.Sura
 import com.quran.audio.app.data.DataSource
+import com.quran.audio.app.ui.media.MediaPlayerActions
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val dataSource: DataSource) : ViewModel() {
+class MainViewModel(private val dataSource: DataSource, val mediaPlayerActions: MediaPlayerActions) : ViewModel() {
     private val loggerTag = "ReciterViewModel"
 
     var errorMessage: String by mutableStateOf("")
@@ -40,10 +41,12 @@ class MainViewModel(private val dataSource: DataSource) : ViewModel() {
 
     fun selectReciter(reciter: Reciter) {
         _selectedReciter.value = ReciterSelected(reciter)
+        mediaPlayerActions.stop()
     }
 
     fun selectSura(sura: Sura) {
         _selectedSura.value = SuraSelected(sura)
+        mediaPlayerActions.stop()
     }
 
     fun getReciterList() {

@@ -157,4 +157,5 @@ interface PlayerActions {
     fun replay10()
     fun skipNext()
     fun skipPrevious()
+    fun stop()
 }

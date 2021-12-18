@@ -25,14 +25,14 @@ import com.quran.audio.app.ui.theme.QuranicAudioAppTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val player = ExoPlayer.Builder(applicationContext).build()
+        val mediaPlayerActions = MediaPlayerActions(player)
         val mainViewModel =
-            MainViewModel(DataSource(getString(R.string.quranicaudio_api_url)))
+            MainViewModel(DataSource(getString(R.string.quranicaudio_api_url)), mediaPlayerActions)
         setContent {
             QuranicAudioAppTheme {
                 val navController = rememberNavController()
                 val actions = remember(navController) { MainActions(navController) }
-                val player = ExoPlayer.Builder(applicationContext).build()
-                val mediaPlayerActions = MediaPlayerActions(player)
                 val reciterSelected by mainViewModel.selectedReciter.observeAsState(ReciterSelected())
                 val suraSelected by mainViewModel.selectedSura.observeAsState(SuraSelected())
                 Scaffold(

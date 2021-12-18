@@ -14,6 +14,11 @@ class MediaPlayerActions(private val player: ExoPlayer) : PlayerActions {
         return _isPlaying.value
     }
 
+    override fun stop() {
+        player.stop()
+        _isPlaying.value = false
+    }
+
     override fun playPause(reciterRelativePath: String?, suraId: Int) {
         if(isPlaying()) {
             player.pause()
