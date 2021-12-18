@@ -32,7 +32,7 @@ fun SuraList(actions: MainActions, viewModel: MainViewModel) {
     LazyColumn {
         items(viewModel.suraList) { item ->
             SuraRow(item,
-                onClick = {
+                onSuraSelected = {
                     viewModel.selectSura(it)
                     actions.mediaPlayerView()
                 }
@@ -43,7 +43,7 @@ fun SuraList(actions: MainActions, viewModel: MainViewModel) {
 
 @ExperimentalMaterialApi
 @Composable
-fun SuraRow(sura: Sura, onClick: (Sura) -> Unit) {
+fun SuraRow(sura: Sura, onSuraSelected: (Sura) -> Unit) {
     Card(
         modifier = Modifier
             .padding(4.dp)
@@ -51,7 +51,7 @@ fun SuraRow(sura: Sura, onClick: (Sura) -> Unit) {
         shape = RoundedCornerShape(2.dp),
         elevation = 2.dp,
         onClick = {
-            onClick(sura)
+            onSuraSelected(sura)
         }
     ) {
         Column(

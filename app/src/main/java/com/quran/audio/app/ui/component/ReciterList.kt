@@ -11,7 +11,6 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -25,14 +24,10 @@ import com.quran.audio.app.ui.navigation.MainActions
 @ExperimentalMaterialApi
 @Composable
 fun ReciterList(actions: MainActions, viewModel: MainViewModel, sectionId: Int) {
-    LaunchedEffect(Unit, block = {
-        viewModel.getReciterList()
-    })
-
     LazyColumn {
         items(viewModel.reciterList.filter { it.sectionId == sectionId }) { item ->
             ReciterRow(item,
-                onClick = {
+                onReciterSelected = {
                     viewModel.selectReciter(it)
                     actions.suraViewScreen()
                 }
@@ -43,14 +38,14 @@ fun ReciterList(actions: MainActions, viewModel: MainViewModel, sectionId: Int) 
 
 @ExperimentalMaterialApi
 @Composable
-fun ReciterRow(reciter: Reciter, onClick: (Reciter) -> Unit) {
+fun ReciterRow(reciter: Reciter, onReciterSelected: (Reciter) -> Unit) {
     Card(
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth(),
         shape = RoundedCornerShape(2.dp),
         elevation = 2.dp,
-        onClick = { onClick(reciter) }
+        onClick = { onReciterSelected(reciter) }
     ) {
         Column(
             modifier = Modifier
