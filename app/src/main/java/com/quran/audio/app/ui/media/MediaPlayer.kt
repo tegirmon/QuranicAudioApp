@@ -114,9 +114,9 @@ fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, s
             ) {
                 Icon(
                     if (playerActions.isPlaying()) {
-                        Icons.Rounded.PlayCircle
-                    } else {
                         Icons.Rounded.PauseCircle
+                    } else {
+                        Icons.Rounded.PlayCircle
                     }, "",
                     Modifier.fillMaxSize(),
                     MaterialTheme.colors.secondary
