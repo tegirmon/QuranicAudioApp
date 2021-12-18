@@ -20,7 +20,9 @@ import androidx.compose.ui.unit.dp
 fun MediaPlayer(
     title: String,
     playerActions: PlayerActions,
-    @DrawableRes img: Int
+    @DrawableRes img: Int,
+    reciterRelativePath: String?,
+    suraId: Int
 ) {
     Column(
         Modifier
@@ -33,7 +35,7 @@ fun MediaPlayer(
         Spacer(Modifier.height(32.dp))
         PlayerTitle(title)
         Spacer(Modifier.height(16.dp))
-        PlayerControls(playerActions)
+        PlayerControls(playerActions, reciterRelativePath, suraId)
     }
 }
 
@@ -74,7 +76,7 @@ fun PlayerTitle(title: String) {
 }
 
 @Composable
-fun PlayerControls(playerActions: PlayerActions) {
+fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, suraId: Int) {
     val playButtonSize = 64.dp
     val buttonSize = 48.dp
     Column(Modifier.fillMaxWidth()) {
@@ -105,7 +107,7 @@ fun PlayerControls(playerActions: PlayerActions) {
                 )
             }
             IconButton(
-                onClick = { playerActions.playPause() },
+                onClick = { playerActions.playPause(reciterRelativePath, suraId) },
                 Modifier
                     .size(playButtonSize)
                     .align(Alignment.Bottom),
@@ -150,7 +152,7 @@ fun PlayerControls(playerActions: PlayerActions) {
 
 interface PlayerActions {
     fun isPlaying(): Boolean
-    fun playPause()
+    fun playPause(reciterRelativePath: String?, suraId: Int)
     fun forward10()
     fun replay10()
     fun skipNext()
