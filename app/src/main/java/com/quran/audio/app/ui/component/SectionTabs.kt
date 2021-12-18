@@ -1,4 +1,4 @@
-package com.quran.audio.app.ui.section
+package com.quran.audio.app.ui.component
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.*
@@ -11,9 +11,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
+import com.quran.audio.app.ui.data.MainViewModel
 import com.quran.audio.app.ui.navigation.MainActions
-import com.quran.audio.app.ui.reciter.ReciterList
-import com.quran.audio.app.ui.reciter.ReciterViewModel
 import kotlinx.coroutines.launch
 
 @ExperimentalMaterialApi
@@ -21,11 +20,10 @@ import kotlinx.coroutines.launch
 @Composable
 fun SectionTabs(
     actions: MainActions,
-    viewModel: SectionViewModel,
-    reciterViewModel: ReciterViewModel
+    mainViewModel: MainViewModel
 ) {
     LaunchedEffect(Unit, block = {
-        viewModel.getSuraList()
+        mainViewModel.getSectionList()
     })
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState()
@@ -38,8 +36,7 @@ fun SectionTabs(
             )
         }
     ) {
-
-        viewModel.sectionList.forEachIndexed { index, section ->
+        mainViewModel.sectionList.forEachIndexed { index, section ->
             Tab(
                 text = { Text(section.name) },
                 selected = pagerState.currentPage == index,
@@ -53,11 +50,11 @@ fun SectionTabs(
     }
 
     HorizontalPager(
-        viewModel.sectionList.size,
+        mainViewModel.sectionList.size,
         contentPadding = PaddingValues(horizontal = 32.dp),
         state = pagerState
     ) { page ->
-        val section = viewModel.sectionList[page]
-        ReciterList(actions, reciterViewModel, section.id)
+        val section = mainViewModel.sectionList[page]
+        ReciterList(actions, mainViewModel, section.id)
     }
 }

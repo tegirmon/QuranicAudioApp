@@ -1,4 +1,4 @@
-package com.quran.audio.app.ui.reciter
+package com.quran.audio.app.ui.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,11 +19,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.quran.audio.api.client.model.Reciter
+import com.quran.audio.app.ui.data.MainViewModel
 import com.quran.audio.app.ui.navigation.MainActions
 
 @ExperimentalMaterialApi
 @Composable
-fun ReciterList(actions: MainActions, viewModel: ReciterViewModel, sectionId: Int) {
+fun ReciterList(actions: MainActions, viewModel: MainViewModel, sectionId: Int) {
     LaunchedEffect(Unit, block = {
         viewModel.getReciterList()
     })

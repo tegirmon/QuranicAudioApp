@@ -15,18 +15,16 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.quran.audio.app.R
-import com.quran.audio.app.ui.reciter.ReciterViewModel
-import com.quran.audio.app.ui.section.SectionTabs
-import com.quran.audio.app.ui.section.SectionViewModel
-import com.quran.audio.app.ui.sura.SuraList
-import com.quran.audio.app.ui.sura.SuraViewModel
+import com.quran.audio.app.ui.data.MainViewModel
+import com.quran.audio.app.ui.component.SectionTabs
+import com.quran.audio.app.ui.component.SuraList
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
-fun Home(actions: MainActions, sectionViewModel: SectionViewModel, reciterViewModel: ReciterViewModel) {
+fun Home(actions: MainActions, viewModel: MainViewModel) {
     Column {
-        SectionTabs(actions, sectionViewModel, reciterViewModel)
+        SectionTabs(actions, viewModel)
         Spacer(modifier = Modifier.requiredHeight(8.dp))
     }
 }
@@ -34,9 +32,9 @@ fun Home(actions: MainActions, sectionViewModel: SectionViewModel, reciterViewMo
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
-fun SuraView(actions: MainActions, suraViewModel: SuraViewModel, reciterRelativePath: String?) {
+fun SuraView(actions: MainActions, viewModel: MainViewModel, reciterRelativePath: String?) {
     Column {
-        SuraList(actions, suraViewModel, reciterRelativePath)
+        SuraList(actions, viewModel, reciterRelativePath)
         Spacer(modifier = Modifier.requiredHeight(8.dp))
     }
 }

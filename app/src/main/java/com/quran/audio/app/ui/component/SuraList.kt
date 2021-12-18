@@ -1,4 +1,4 @@
-package com.quran.audio.app.ui.sura
+package com.quran.audio.app.ui.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,10 +20,11 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.quran.audio.api.client.model.Sura
 import com.quran.audio.app.ui.navigation.MainActions
+import com.quran.audio.app.ui.data.MainViewModel
 
 @ExperimentalMaterialApi
 @Composable
-fun SuraList(actions: MainActions, viewModel: SuraViewModel, reciterRelativePath: String?) {
+fun SuraList(actions: MainActions, viewModel: MainViewModel, reciterRelativePath: String?) {
     LaunchedEffect(Unit, block = {
         viewModel.getSuraList()
     })
