@@ -25,6 +25,7 @@ fun SectionTabs(
     LaunchedEffect(Unit, block = {
         mainViewModel.getSectionList()
         mainViewModel.getReciterList()
+        mainViewModel.getSuraList()
     })
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState()

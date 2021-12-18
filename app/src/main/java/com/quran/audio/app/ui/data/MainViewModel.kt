@@ -53,6 +53,7 @@ class MainViewModel(private val dataSource: DataSource) : ViewModel() {
                     {
                         _reciterList.clear()
                         _reciterList.addAll(it)
+                        selectReciter(it.first())
                     }, {
                         errorMessage = it.localizedMessage ?: "Failed "
                         Log.e(loggerTag, errorMessage)
@@ -89,6 +90,7 @@ class MainViewModel(private val dataSource: DataSource) : ViewModel() {
                     {
                         _suraList.clear()
                         _suraList.addAll(it)
+                        selectSura(it.first())
                     }, {
                         errorMessage = it.localizedMessage ?: "Failed "
                         Log.e(loggerTag, errorMessage)

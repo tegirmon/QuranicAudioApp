@@ -7,7 +7,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.android.exoplayer2.ExoPlayer
 import com.quran.audio.app.R
 import com.quran.audio.app.ui.media.MediaPlayer
 import com.quran.audio.app.ui.media.MediaPlayerActions
@@ -23,7 +22,7 @@ fun MainNavGraph(
     navController: NavHostController,
     actions: MainActions,
     mainViewModel: MainViewModel,
-    player: ExoPlayer
+    playerActions: MediaPlayerActions
 ) {
     NavHost(navController, Screen.Home.route) {
         composable(Screen.Home.route) {
@@ -35,7 +34,7 @@ fun MainNavGraph(
         composable(Screen.Player.route) {
             val reciterSelected by mainViewModel.selectedReciter.observeAsState(ReciterSelected())
             val suraSelected by mainViewModel.selectedSura.observeAsState(SuraSelected())
-            MediaPlayer(MediaPlayerActions(player), R.drawable.islamic_art, reciterSelected, suraSelected)
+            MediaPlayer(playerActions, R.drawable.islamic_art, reciterSelected, suraSelected)
         }
     }
 }

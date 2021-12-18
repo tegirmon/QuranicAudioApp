@@ -11,7 +11,6 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -19,16 +18,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.quran.audio.api.client.model.Sura
-import com.quran.audio.app.ui.navigation.MainActions
 import com.quran.audio.app.ui.data.MainViewModel
+import com.quran.audio.app.ui.navigation.MainActions
 
 @ExperimentalMaterialApi
 @Composable
 fun SuraList(actions: MainActions, viewModel: MainViewModel) {
-    LaunchedEffect(Unit, block = {
-        viewModel.getSuraList()
-    })
-
     LazyColumn {
         items(viewModel.suraList) { item ->
             SuraRow(item,
