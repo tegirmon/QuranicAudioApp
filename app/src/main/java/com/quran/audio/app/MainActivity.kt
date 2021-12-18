@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                 val reciterSelected by mainViewModel.selectedReciter.observeAsState(ReciterSelected())
                 val suraSelected by mainViewModel.selectedSura.observeAsState(SuraSelected())
                 Scaffold(
-                    topBar = { TopBar() },
+                    topBar = { TopBar(actions, navController) },
                     bottomBar = { PlayerBar(mediaPlayerActions, reciterSelected, suraSelected) }
                 ) {
                     MainNavGraph(navController, actions, mainViewModel, mediaPlayerActions)
