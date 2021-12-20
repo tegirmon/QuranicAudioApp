@@ -109,7 +109,7 @@ fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, s
                 )
             }
             IconButton(
-                onClick = { playerActions.playPause(reciterRelativePath, suraId) },
+                onClick = { playerActions.playPause(AudioUriParser.parse(reciterRelativePath, suraId)) },
                 Modifier
                     .size(playButtonSize)
                     .align(Alignment.Bottom),
@@ -154,7 +154,7 @@ fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, s
 
 interface PlayerActions {
     fun isPlaying(): Boolean
-    fun playPause(reciterRelativePath: String?, suraId: Int)
+    fun playPause(audioUrl: String)
     fun forward10()
     fun replay10()
     fun skipNext()

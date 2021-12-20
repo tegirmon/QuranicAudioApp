@@ -19,11 +19,10 @@ class MediaPlayerActions(private val player: ExoPlayer) : PlayerActions {
         _isPlaying.value = false
     }
 
-    override fun playPause(reciterRelativePath: String?, suraId: Int) {
+    override fun playPause(audioUrl: String) {
         if(isPlaying()) {
             player.pause()
         } else {
-            val audioUrl = AudioUriParser.parse(reciterRelativePath, suraId)
             Log.d(logTag, audioUrl)
             val mediaItem: MediaItem = MediaItem.Builder()
                 .setUri(audioUrl)
