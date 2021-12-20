@@ -5,26 +5,28 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColors(
-    primary = Blue200,
-    primaryVariant = Blue700,
-    secondary = Orange200
+    primary = LessBlack,
+    primaryVariant = AlmostBlack,
+    secondary = BrightBlueLight,
+    secondaryVariant = BrightBlue,
+    onPrimary = BlueGrayLight
 )
 
 private val LightColorPalette = lightColors(
-    primary = Blue400,
-    primaryVariant = Blue700,
-    secondary = Orange200
+    primary = BlueGray,
+    primaryVariant = BlueGrayDark,
+    secondary = BrightBlue,
+    secondaryVariant = BrightBlueDark,
+    background = White,
+    surface = AlmostWhite,
+    onPrimary = White,
+    onSecondary = Grayish,
+    onBackground = Grayish,
+    onSurface = Grayish,
 
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
 )
 
 @Composable
@@ -44,4 +46,6 @@ fun QuranicAudioAppTheme(
         shapes = Shapes,
         content = content
     )
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(color = colors.primary)
 }
