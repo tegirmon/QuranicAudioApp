@@ -1,6 +1,7 @@
 package com.quran.audio.app.ui.component
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,7 +25,9 @@ import com.quran.audio.app.ui.navigation.MainActions
 @ExperimentalMaterialApi
 @Composable
 fun SuraList(actions: MainActions, viewModel: MainViewModel) {
-    LazyColumn {
+    LazyColumn(
+        contentPadding = PaddingValues(horizontal = 16.dp)
+    ) {
         items(viewModel.suraList) { item ->
             SuraRow(item,
                 onSuraSelected = {
@@ -43,8 +46,8 @@ fun SuraRow(sura: Sura, onSuraSelected: (Sura) -> Unit) {
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth(),
-        shape = RoundedCornerShape(2.dp),
-        elevation = 2.dp,
+        shape = RoundedCornerShape(8.dp),
+        elevation = 4.dp,
         onClick = {
             onSuraSelected(sura)
         }
@@ -57,8 +60,8 @@ fun SuraRow(sura: Sura, onSuraSelected: (Sura) -> Unit) {
                 buildAnnotatedString {
                     withStyle(
                         style = SpanStyle(
-                            fontWeight = FontWeight.W900,
-                            color = MaterialTheme.colors.primary
+                            fontWeight = FontWeight.W700,
+                            color = MaterialTheme.colors.secondaryVariant
                         )
                     ) {
                         append(sura.name.simple)

@@ -1,19 +1,24 @@
 package com.quran.audio.app.ui.component
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import com.quran.audio.app.ui.data.MainViewModel
 import com.quran.audio.app.ui.navigation.MainActions
-import kotlinx.coroutines.launch
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
@@ -22,36 +27,49 @@ fun SectionTabs(
     actions: MainActions,
     mainViewModel: MainViewModel
 ) {
-    val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState()
-
-    ScrollableTabRow(
-        selectedTabIndex = pagerState.currentPage,
-        indicator = { tabPositions ->
-            TabRowDefaults.Indicator(
-                Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
-            )
-        }
-    ) {
-        mainViewModel.sectionList.forEachIndexed { index, section ->
-            Tab(
-                text = { Text(section.name) },
-                selected = pagerState.currentPage == index,
-                onClick = {
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(index)
-                    }
-                },
-            )
-        }
-    }
-
     HorizontalPager(
         mainViewModel.sectionList.size,
         contentPadding = PaddingValues(horizontal = 32.dp),
         state = pagerState
     ) { page ->
         val section = mainViewModel.sectionList[page]
-        ReciterList(actions, mainViewModel, section.id)
+        Column() {
+            SectionHeader(section.name)
+            ReciterList(actions, mainViewModel, section.id)
+        }
     }
 }
+
+@Composable
+fun SectionHeader(sectionName: String) {
+    Card(
+        modifier = Modifier
+            .padding(4.dp)
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(2.dp),
+        elevation = 2.dp,
+        backgroundColor = MaterialTheme.colors.primary,
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(15.dp)
+                .fillMaxWidth()
+        ) {
+            Row(
+                Modifier.align(Alignment.CenterHorizontally)
+            ) {
+                Text(buildAnnotatedString {
+                    withStyle(
+                        style = SpanStyle(
+                            fontWeight = FontWeight.W900
+                        )
+                    ) {
+                        append(sectionName)
+                    }
+                })
+            }
+        }
+    }
+}
+

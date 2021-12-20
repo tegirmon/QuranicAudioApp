@@ -43,9 +43,11 @@ fun ReciterRow(reciter: Reciter, onReciterSelected: (Reciter) -> Unit) {
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth(),
-        shape = RoundedCornerShape(2.dp),
-        elevation = 2.dp,
-        onClick = { onReciterSelected(reciter) }
+        shape = RoundedCornerShape(8.dp),
+        elevation = 4.dp,
+        onClick = { onReciterSelected(reciter) },
+        backgroundColor = MaterialTheme.colors.surface,
+        contentColor = MaterialTheme.colors.onSurface
     ) {
         Column(
             modifier = Modifier
@@ -54,7 +56,7 @@ fun ReciterRow(reciter: Reciter, onReciterSelected: (Reciter) -> Unit) {
             Text(
                 buildAnnotatedString {
                     withStyle(
-                        style = SpanStyle(fontWeight = FontWeight.W900, color = MaterialTheme.colors.primary)
+                        style = SpanStyle(fontWeight = FontWeight.W700, color = MaterialTheme.colors.secondaryVariant)
                     ) {
                         append(reciter.name)
                     }

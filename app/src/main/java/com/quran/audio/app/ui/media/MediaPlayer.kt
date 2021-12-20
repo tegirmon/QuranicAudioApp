@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.*
@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.quran.audio.app.ui.data.ReciterSelected
@@ -47,8 +48,8 @@ fun PlayerImage(@DrawableRes image: Int) {
                 modifier = Modifier
                     .size(360.dp)
                     .fillMaxWidth(),
-                shape = CircleShape,
-                elevation = 2.dp
+                shape = RoundedCornerShape(8.dp),
+                elevation = 4.dp
             ) {
                 Image(
                     painterResource(image),
@@ -69,7 +70,8 @@ fun PlayerTitle(title: String) {
                 title,
                 Modifier.fillMaxWidth(),
                 MaterialTheme.colors.secondaryVariant,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.W600
             )
         }
     }
