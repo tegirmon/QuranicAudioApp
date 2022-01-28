@@ -43,36 +43,7 @@ fun TopBar(actions: MainActions, navController: NavHostController) {
 }
 
 @Composable
-fun BottomBar(navController: NavController, screens: List<Screen>) {
-    BottomNavigation {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentDestination = navBackStackEntry?.destination
-        screens.forEach { screen ->
-            BottomNavigationItem(
-                icon = {
-                    Icon(
-                        screen.icon,
-                        contentDescription = null
-                    )
-                },
-                label = { Text(stringResource(screen.resourceId)) },
-                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                onClick = {
-                    navController.navigate(screen.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                }
-            )
-        }
-    }
-}
-
-@Composable
-fun PlayerBar(
+fun PlayerBottomBar(
     playerActions: PlayerActions,
     reciterSelected: ReciterSelected,
     suraSelected: SuraSelected

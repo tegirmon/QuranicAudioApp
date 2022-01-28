@@ -1,66 +1,19 @@
 package com.quran.audio.app.ui.media
 
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.quran.audio.app.ui.data.ReciterSelected
-import com.quran.audio.app.ui.data.SuraSelected
 
-@Composable
-fun MediaPlayer(playerActions: PlayerActions, @DrawableRes img: Int, reciterSelected: ReciterSelected, suraSelected: SuraSelected) {
-    Column(
-        Modifier
-            .background(MaterialTheme.colors.background)
-            .padding(12.dp)
-            .fillMaxWidth()
-            .fillMaxHeight()
-    ) {
-        val relativePath = reciterSelected.reciter?.relativePath
-        val suraId = suraSelected.sura?.id ?: 0
-        val title = "${reciterSelected.reciter?.name} - ${suraSelected.sura?.name?.simple}"
-
-        PlayerImage(img)
-        Spacer(Modifier.height(32.dp))
-        PlayerTitle(title)
-        Spacer(Modifier.height(16.dp))
-        PlayerControls(playerActions, relativePath, suraId)
-    }
-}
-
-@Composable
-fun PlayerImage(@DrawableRes image: Int) {
-    Column(Modifier.fillMaxWidth()) {
-        Row(Modifier.align(Alignment.CenterHorizontally)) {
-            Card(
-                modifier = Modifier
-                    .size(360.dp)
-                    .fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp),
-                elevation = 4.dp
-            ) {
-                Image(
-                    painterResource(image),
-                    contentDescription = "Art",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
-        }
-    }
-}
 
 @Composable
 fun PlayerTitle(title: String) {

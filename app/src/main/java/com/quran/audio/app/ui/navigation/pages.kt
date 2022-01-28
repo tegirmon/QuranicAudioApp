@@ -32,9 +32,9 @@ fun Home(actions: MainActions, viewModel: MainViewModel) {
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
-fun SuraView(actions: MainActions, viewModel: MainViewModel) {
+fun SuraView(viewModel: MainViewModel) {
     Column {
-        SuraList(actions, viewModel)
+        SuraList(viewModel)
         Spacer(modifier = Modifier.requiredHeight(8.dp))
     }
 }
@@ -42,5 +42,4 @@ fun SuraView(actions: MainActions, viewModel: MainViewModel) {
 sealed class Screen(val route: String, @StringRes val resourceId: Int, val icon: ImageVector) {
     object Home : Screen("home", R.string.home, Icons.Filled.Home)
     object SuraList : Screen("suraList", R.string.sura_list, Icons.Filled.List)
-    object Player : Screen("player", R.string.player, Icons.Filled.PlayArrow)
 }

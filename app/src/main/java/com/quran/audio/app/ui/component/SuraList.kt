@@ -20,11 +20,10 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.quran.audio.api.client.model.Sura
 import com.quran.audio.app.ui.data.MainViewModel
-import com.quran.audio.app.ui.navigation.MainActions
 
 @ExperimentalMaterialApi
 @Composable
-fun SuraList(actions: MainActions, viewModel: MainViewModel) {
+fun SuraList(viewModel: MainViewModel) {
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
@@ -32,7 +31,6 @@ fun SuraList(actions: MainActions, viewModel: MainViewModel) {
             SuraRow(item,
                 onSuraSelected = {
                     viewModel.selectSura(it)
-                    actions.mediaPlayerView()
                 }
             )
         }

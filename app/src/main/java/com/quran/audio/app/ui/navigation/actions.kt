@@ -7,9 +7,6 @@ class MainActions(navController: NavHostController) {
     val suraViewScreen: () -> Unit = {
         navController.navigate(Screen.SuraList.route)
     }
-    val mediaPlayerView: () -> Unit = {
-        navController.navigate(Screen.Player.route)
-    }
     val upPress: () -> Unit = {
         navController.navigateUp()
     }
