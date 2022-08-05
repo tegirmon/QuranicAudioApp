@@ -14,7 +14,7 @@ import com.quran.audio.app.ui.data.MainViewModel
 @Composable
 fun MainNavGraph(
     navController: NavHostController,
-    actions: MainActions,
+    actions: NavActions,
     mainViewModel: MainViewModel
 ) {
     LaunchedEffect(Unit, block = {
@@ -28,6 +28,9 @@ fun MainNavGraph(
         }
         composable(Screen.SuraList.route) {
             SuraView(mainViewModel)
+        }
+        composable(Screen.PlayList.route) {
+            PlayListView(mainViewModel)
         }
     }
 }

@@ -39,6 +39,14 @@ class MainViewModel(private val dataSource: DataSource, val mediaPlayerActions: 
     private var _selectedSura: MutableLiveData<SuraSelected> = MutableLiveData(SuraSelected())
     val selectedSura: LiveData<SuraSelected> = _selectedSura
 
+
+    private val _playlist = mutableStateListOf<PlayListItem>()
+    val playList: List<PlayListItem> = _playlist
+
+    fun addToPlaylist(item: String, reciter: Reciter, sura: Sura, i: Int) {
+        _playlist.add(PlayListItem(item, reciter, sura, i))
+    }
+
     fun selectReciter(reciter: Reciter) {
         _selectedReciter.value = ReciterSelected(reciter)
         mediaPlayerActions.stop()

@@ -12,6 +12,8 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.android.exoplayer2.ExoPlayer
 import com.quran.audio.app.data.DataSource
+import com.quran.audio.app.ui.appbar.PlayerBottomBar
+import com.quran.audio.app.ui.appbar.TopBar
 import com.quran.audio.app.ui.navigation.*
 import com.quran.audio.app.ui.data.MainViewModel
 import com.quran.audio.app.ui.data.ReciterSelected
@@ -32,7 +34,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             QuranicAudioAppTheme {
                 val navController = rememberNavController()
-                val actions = remember(navController) { MainActions(navController) }
+                val actions = remember(navController) { NavActions(navController) }
                 val reciterSelected by mainViewModel.selectedReciter.observeAsState(ReciterSelected())
                 val suraSelected by mainViewModel.selectedSura.observeAsState(SuraSelected())
                 Scaffold(

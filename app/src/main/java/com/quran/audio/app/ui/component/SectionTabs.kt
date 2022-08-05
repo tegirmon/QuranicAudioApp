@@ -18,13 +18,13 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.quran.audio.app.ui.data.MainViewModel
-import com.quran.audio.app.ui.navigation.MainActions
+import com.quran.audio.app.ui.navigation.NavActions
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
 fun SectionTabs(
-    actions: MainActions,
+    actions: NavActions,
     mainViewModel: MainViewModel
 ) {
     val pagerState = rememberPagerState()

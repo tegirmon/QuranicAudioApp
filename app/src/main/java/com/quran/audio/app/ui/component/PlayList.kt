@@ -17,19 +17,22 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import com.quran.audio.api.client.model.Reciter
 import com.quran.audio.app.ui.data.MainViewModel
-import com.quran.audio.app.ui.navigation.NavActions
+import com.quran.audio.app.ui.data.PlayListItem
 
 @ExperimentalMaterialApi
 @Composable
-fun ReciterList(actions: NavActions, viewModel: MainViewModel, sectionId: Int) {
+fun PlayList(viewModel: MainViewModel) {
     LazyColumn {
-        items(viewModel.reciterList.filter { it.sectionId == sectionId }) { item ->
-            ReciterRow(item,
-                onReciterSelected = {
-                    viewModel.selectReciter(it)
-                    actions.suraViewScreen()
+        item {
+            if(viewModel.playList.isEmpty()) {
+                Text(text = "Playlist is empty")
+            }
+        }
+        items(viewModel.playList) { item ->
+            PlayListRow(item,
+                onPlayListItemClicked = {
+
                 }
             )
         }
@@ -38,14 +41,14 @@ fun ReciterList(actions: NavActions, viewModel: MainViewModel, sectionId: Int) {
 
 @ExperimentalMaterialApi
 @Composable
-fun ReciterRow(reciter: Reciter, onReciterSelected: (Reciter) -> Unit) {
+fun PlayListRow(playListItem: PlayListItem, onPlayListItemClicked: (PlayListItem) -> Unit) {
     Card(
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth(),
         shape = RoundedCornerShape(8.dp),
         elevation = 4.dp,
-        onClick = { onReciterSelected(reciter) },
+        onClick = { onPlayListItemClicked(playListItem) },
         backgroundColor = MaterialTheme.colors.surface,
         contentColor = MaterialTheme.colors.onSurface
     ) {
@@ -58,18 +61,11 @@ fun ReciterRow(reciter: Reciter, onReciterSelected: (Reciter) -> Unit) {
                     withStyle(
                         style = SpanStyle(fontWeight = FontWeight.W700, color = MaterialTheme.colors.secondaryVariant)
                     ) {
-                        append(reciter.name)
+                        append(playListItem.title)
+                        append("(${playListItem.order})")
                     }
                 }
             )
-            Text(buildAnnotatedString {
-                withStyle(
-                    style = SpanStyle(fontWeight = FontWeight.W400, color = MaterialTheme.colors.secondary)
-                ) {
-                    append(reciter.arabicName ?: "")
-                }
-            })
-            Text(reciter.description ?: "")
         }
     }
 }

@@ -3,7 +3,10 @@ package com.quran.audio.app.ui.navigation
 import androidx.navigation.NavHostController
 
 
-class MainActions(navController: NavHostController) {
+class NavActions(navController: NavHostController) {
+    val playListScreen: () -> Unit = {
+        navController.navigate(Screen.PlayList.route)
+    }
     val suraViewScreen: () -> Unit = {
         navController.navigate(Screen.SuraList.route)
     }
