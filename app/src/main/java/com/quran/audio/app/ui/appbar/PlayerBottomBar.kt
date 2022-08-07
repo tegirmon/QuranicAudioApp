@@ -1,46 +1,20 @@
-package com.quran.audio.app.ui.navigation
+package com.quran.audio.app.ui.appbar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.quran.audio.app.R
 import com.quran.audio.app.ui.data.ReciterSelected
 import com.quran.audio.app.ui.data.SuraSelected
 import com.quran.audio.app.ui.media.PlayerActions
 import com.quran.audio.app.ui.media.PlayerControls
 import com.quran.audio.app.ui.media.PlayerTitle
-
-@Composable
-fun TopBar(actions: MainActions, navController: NavHostController) {
-    TopAppBar(
-        title = { Text(stringResource(R.string.app_name)) },
-        backgroundColor = MaterialTheme.colors.primaryVariant,
-        navigationIcon = {
-            val navBackStackEntry by navController.currentBackStackEntryAsState()
-            val currentDestination = navBackStackEntry?.destination
-            if (currentDestination?.route != Screen.Home.route) {
-                IconButton(onClick = { actions.upPress() }) {
-                    Icon(Icons.Filled.ArrowBack, "")
-                }
-            }
-        }
-    )
-}
 
 @Composable
 fun PlayerBottomBar(

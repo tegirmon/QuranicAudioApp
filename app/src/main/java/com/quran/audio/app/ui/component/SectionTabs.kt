@@ -47,8 +47,6 @@ fun SectionHeader(sectionName: String) {
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth(),
-        shape = RoundedCornerShape(2.dp),
-        elevation = 2.dp,
         backgroundColor = MaterialTheme.colors.primary,
     ) {
         Column(
