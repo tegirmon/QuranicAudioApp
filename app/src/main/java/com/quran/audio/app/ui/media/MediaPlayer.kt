@@ -74,7 +74,7 @@ fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, s
                         Icons.Rounded.PlayCircle
                     }, "",
                     Modifier.fillMaxSize(),
-                    MaterialTheme.colorScheme.secondary
+                    MaterialTheme.colorScheme.primary
                 )
             }
             IconButton(
