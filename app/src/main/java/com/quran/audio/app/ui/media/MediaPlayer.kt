@@ -1,10 +1,10 @@
 package com.quran.audio.app.ui.media
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.runtime.Composable
@@ -22,7 +22,7 @@ fun PlayerTitle(title: String) {
             Text(
                 title,
                 Modifier.fillMaxWidth(),
-                MaterialTheme.colors.secondaryVariant,
+                MaterialTheme.colorScheme.tertiary,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.W600
             )
@@ -46,7 +46,7 @@ fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, s
                     Icons.Rounded.SkipPrevious,
                     "Previous",
                     Modifier.fillMaxSize(),
-                    MaterialTheme.colors.secondary
+                    MaterialTheme.colorScheme.secondary
                 )
             }
             IconButton(
@@ -58,7 +58,7 @@ fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, s
                 Icon(
                     Icons.Rounded.Replay10, "",
                     Modifier.fillMaxSize(),
-                    MaterialTheme.colors.secondary
+                    MaterialTheme.colorScheme.secondary
                 )
             }
             IconButton(
@@ -74,7 +74,7 @@ fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, s
                         Icons.Rounded.PlayCircle
                     }, "",
                     Modifier.fillMaxSize(),
-                    MaterialTheme.colors.secondary
+                    MaterialTheme.colorScheme.secondary
                 )
             }
             IconButton(
@@ -86,7 +86,7 @@ fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, s
                 Icon(
                     Icons.Rounded.Forward10, "",
                     Modifier.fillMaxSize(),
-                    MaterialTheme.colors.secondary
+                    MaterialTheme.colorScheme.secondary
                 )
             }
             IconButton(
@@ -98,7 +98,7 @@ fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, s
                 Icon(
                     Icons.Rounded.SkipNext, "",
                     Modifier.fillMaxSize(),
-                    MaterialTheme.colors.secondary
+                    MaterialTheme.colorScheme.secondary
                 )
             }
         }

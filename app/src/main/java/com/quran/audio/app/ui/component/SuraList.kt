@@ -5,14 +5,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.AddCircleOutline
 import androidx.compose.material.icons.filled.PlayCircleFilled
 import androidx.compose.material.icons.filled.PlayCircleOutline
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,7 +33,7 @@ fun SuraList(
 ) {
     val context = LocalContext.current
     LazyColumn(
-        contentPadding = PaddingValues(horizontal = 8.dp)
+        contentPadding = PaddingValues(horizontal = 0.dp)
     ) {
         items(suraList) { item ->
             SuraRow(item,
@@ -58,10 +58,9 @@ fun SuraRow(
 ) {
     Card(
         modifier = Modifier
-            .padding(4.dp)
+            .padding(2.dp)
             .fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        elevation = 4.dp,
+        shape = RoundedCornerShape(0.dp)
 
     ) {
         Column(
@@ -87,7 +86,7 @@ fun SuraName(name: SuraName) {
             withStyle(
                 style = SpanStyle(
                     fontWeight = FontWeight.W700,
-                    color = MaterialTheme.colors.secondaryVariant
+                    color = MaterialTheme.colorScheme.tertiary
                 )
             ) {
                 append(name.simple)
@@ -99,7 +98,7 @@ fun SuraName(name: SuraName) {
             withStyle(
                 style = SpanStyle(
                     fontWeight = FontWeight.W400,
-                    color = MaterialTheme.colors.secondary
+                    color = MaterialTheme.colorScheme.secondary
                 )
             ) {
                 append(name.arabic)
@@ -114,10 +113,10 @@ fun SuraActions(onSelect: () -> Unit, onAdd: () -> Unit) {
         .fillMaxWidth(),
         horizontalArrangement = Arrangement.End,
     ) {
-        PlayButton(modifier = Modifier, color = MaterialTheme.colors.primary) {
+        PlayButton(modifier = Modifier, color = MaterialTheme.colorScheme.primary) {
             onSelect()
         }
-        AddToButton(modifier = Modifier, color = MaterialTheme.colors.secondary) {
+        AddToButton(modifier = Modifier, color = MaterialTheme.colorScheme.secondary) {
             onAdd()
         }
     }

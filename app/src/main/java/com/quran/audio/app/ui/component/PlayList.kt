@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
+import androidx.compose.material3.Card
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
@@ -30,27 +30,19 @@ fun PlayList(viewModel: MainViewModel) {
             }
         }
         items(viewModel.playList) { item ->
-            PlayListRow(item,
-                onPlayListItemClicked = {
-
-                }
-            )
+            PlayListRow(item)
         }
     }
 }
 
 @ExperimentalMaterialApi
 @Composable
-fun PlayListRow(playListItem: PlayListItem, onPlayListItemClicked: (PlayListItem) -> Unit) {
+fun PlayListRow(playListItem: PlayListItem) {
     Card(
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        elevation = 4.dp,
-        onClick = { onPlayListItemClicked(playListItem) },
-        backgroundColor = MaterialTheme.colors.surface,
-        contentColor = MaterialTheme.colors.onSurface
+        shape = RoundedCornerShape(8.dp)
     ) {
         Column(
             modifier = Modifier
@@ -59,7 +51,7 @@ fun PlayListRow(playListItem: PlayListItem, onPlayListItemClicked: (PlayListItem
             Text(
                 buildAnnotatedString {
                     withStyle(
-                        style = SpanStyle(fontWeight = FontWeight.W700, color = MaterialTheme.colors.secondaryVariant)
+                        style = SpanStyle(fontWeight = FontWeight.W700, color = MaterialTheme.colorScheme.secondary)
                     ) {
                         append(playListItem.title)
                         append("(${playListItem.order})")

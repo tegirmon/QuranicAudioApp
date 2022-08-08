@@ -34,7 +34,7 @@ fun Home(viewModel: MainViewModel, mediaPlayerActions: MediaPlayerActions) {
         ) { reciter ->
             viewModel.selectReciter(reciter)
         }
-        Spacer(modifier = Modifier.requiredHeight(8.dp))
+        Spacer(modifier = Modifier.requiredHeight(1.dp))
         SuraList(
             viewModel.suraList,
             {

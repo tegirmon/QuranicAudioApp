@@ -1,6 +1,7 @@
 package com.quran.audio.app.ui.appbar
 
 import androidx.compose.material.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FeaturedPlayList
@@ -17,7 +18,8 @@ import com.quran.audio.app.ui.navigation.Screen
 fun TopBar(actions: NavActions, navController: NavHostController) {
     TopAppBar(
         title = { Text(stringResource(R.string.app_name)) },
-        backgroundColor = MaterialTheme.colors.primaryVariant,
+        backgroundColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
         navigationIcon = {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentDestination = navBackStackEntry?.destination

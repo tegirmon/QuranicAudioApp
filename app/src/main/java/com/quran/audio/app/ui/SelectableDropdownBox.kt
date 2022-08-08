@@ -1,10 +1,12 @@
 package com.quran.audio.app.ui
 
 import android.util.Log
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.quran.audio.app.ui.ui.theme.QuranicAudioAppTheme
+import com.quran.audio.app.ui.theme.QuranicAudioAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,7 +35,8 @@ fun SelectableDropdownBox(
                     expanded = expanded
                 )
             },
-            colors = ExposedDropdownMenuDefaults.textFieldColors()
+            colors = ExposedDropdownMenuDefaults.textFieldColors(),
+            modifier = Modifier.fillMaxWidth()
         )
         ExposedDropdownMenu(
             expanded = expanded,

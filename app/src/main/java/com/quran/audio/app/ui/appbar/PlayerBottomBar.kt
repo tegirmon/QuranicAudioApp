@@ -3,8 +3,8 @@ package com.quran.audio.app.ui.appbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -26,13 +26,13 @@ fun PlayerBottomBar(
     val suraId = suraSelected.sura?.id ?: 0
     val title = if(reciterSelected.reciter == null || suraSelected.sura == null) "Loading.."
                 else "${reciterSelected.reciter.name} - ${suraSelected.sura.name.simple}"
-    val borderColor = MaterialTheme.colors.primaryVariant
+    val borderColor = MaterialTheme.colorScheme.tertiary
     val borderWidth = 4.dp
     Card(
         shape = RoundedCornerShape(0.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colors.background)
+            .background(MaterialTheme.colorScheme.background)
             .drawBehind {
                 val strokeWidth = borderWidth.value * density
                 drawLine(
