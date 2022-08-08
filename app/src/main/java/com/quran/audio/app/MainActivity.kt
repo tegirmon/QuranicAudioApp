@@ -14,11 +14,12 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.quran.audio.app.data.DataSource
 import com.quran.audio.app.ui.appbar.PlayerBottomBar
 import com.quran.audio.app.ui.appbar.TopBar
-import com.quran.audio.app.ui.navigation.*
 import com.quran.audio.app.ui.data.MainViewModel
 import com.quran.audio.app.ui.data.ReciterSelected
 import com.quran.audio.app.ui.data.SuraSelected
 import com.quran.audio.app.ui.media.MediaPlayerActions
+import com.quran.audio.app.ui.navigation.MainNavGraph
+import com.quran.audio.app.ui.navigation.NavActions
 import com.quran.audio.app.ui.theme.QuranicAudioAppTheme
 
 
@@ -41,7 +42,8 @@ class MainActivity : ComponentActivity() {
                     topBar = { TopBar(actions, navController) },
                     bottomBar = { PlayerBottomBar(mediaPlayerActions, reciterSelected, suraSelected) }
                 ) {
-                    MainNavGraph(navController, actions, mainViewModel)
+                    it.calculateBottomPadding()
+                    MainNavGraph(navController, mainViewModel, mediaPlayerActions)
                 }
             }
         }

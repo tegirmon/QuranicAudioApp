@@ -43,8 +43,10 @@ class MainViewModel(private val dataSource: DataSource, val mediaPlayerActions: 
     private val _playlist = mutableStateListOf<PlayListItem>()
     val playList: List<PlayListItem> = _playlist
 
-    fun addToPlaylist(item: String, reciter: Reciter, sura: Sura, i: Int) {
-        _playlist.add(PlayListItem(item, reciter, sura, i))
+    fun addToPlaylist(sura: Sura, i: Int) {
+        val reciter = selectedReciter.value?.reciter
+        val title = "${reciter?.name} - ${sura.name.simple}"
+        _playlist.add(PlayListItem(title, reciter!!, sura, i))
     }
 
     fun selectReciter(reciter: Reciter) {

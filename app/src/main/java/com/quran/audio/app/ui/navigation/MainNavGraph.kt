@@ -8,14 +8,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.quran.audio.app.ui.data.MainViewModel
+import com.quran.audio.app.ui.media.MediaPlayerActions
 
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
 @Composable
 fun MainNavGraph(
     navController: NavHostController,
-    actions: NavActions,
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel,
+    mediaPlayerActions: MediaPlayerActions
 ) {
     LaunchedEffect(Unit, block = {
         mainViewModel.getSectionList()
@@ -24,10 +25,7 @@ fun MainNavGraph(
     })
     NavHost(navController, Screen.Home.route) {
         composable(Screen.Home.route) {
-            Home(actions, mainViewModel)
-        }
-        composable(Screen.SuraList.route) {
-            SuraView(mainViewModel)
+            Home(mainViewModel, mediaPlayerActions)
         }
         composable(Screen.PlayList.route) {
             PlayListView(mainViewModel)

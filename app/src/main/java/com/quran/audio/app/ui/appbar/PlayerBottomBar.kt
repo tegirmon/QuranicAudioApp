@@ -24,7 +24,8 @@ fun PlayerBottomBar(
 ) {
     val relativePath = reciterSelected.reciter?.relativePath
     val suraId = suraSelected.sura?.id ?: 0
-    val title = "${reciterSelected.reciter?.name} - ${suraSelected.sura?.name?.simple}"
+    val title = if(reciterSelected.reciter == null || suraSelected.sura == null) "Loading.."
+                else "${reciterSelected.reciter.name} - ${suraSelected.sura.name.simple}"
     val borderColor = MaterialTheme.colors.primaryVariant
     val borderWidth = 4.dp
     Card(
