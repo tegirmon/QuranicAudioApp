@@ -1,12 +1,7 @@
 package com.quran.audio.app.ui.data
 
 import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quran.audio.api.client.model.Reciter
@@ -33,18 +28,19 @@ class MainViewModel(private val dataSource: DataSource, val mediaPlayerActions: 
     val suraList: List<Sura>
         get() = _suraList
 
-    private var _selectedReciter: MutableLiveData<ReciterSelected> = MutableLiveData(ReciterSelected())
-    val selectedReciter: LiveData<ReciterSelected> = _selectedReciter
+    private var _selectedReciter = mutableStateOf(ReciterSelected())
+    val selectedReciter: State<ReciterSelected>
+        get() = _selectedReciter
 
-    private var _selectedSura: MutableLiveData<SuraSelected> = MutableLiveData(SuraSelected())
-    val selectedSura: LiveData<SuraSelected> = _selectedSura
+    private var _selectedSura = mutableStateOf(SuraSelected())
+    val selectedSura: State<SuraSelected> = _selectedSura
 
 
     private val _playlist = mutableStateListOf<PlayListItem>()
     val playList: List<PlayListItem> = _playlist
 
     fun addToPlaylist(sura: Sura, i: Int) {
-        val reciter = selectedReciter.value?.reciter
+        val reciter = selectedReciter.value.reciter
         val title = "${reciter?.name} - ${sura.name.simple}"
         _playlist.add(PlayListItem(title, reciter!!, sura, i))
     }

@@ -27,7 +27,7 @@ import com.quran.audio.app.ui.media.MediaPlayerActions
 @Composable
 fun Home(viewModel: MainViewModel, mediaPlayerActions: MediaPlayerActions) {
     Column {
-        val selectedReciter: ReciterSelected by viewModel.selectedReciter.observeAsState(ReciterSelected())
+        val selectedReciter: ReciterSelected by viewModel.selectedReciter
         ReciterSelector(
             viewModel.reciterList,
             selectedReciter
