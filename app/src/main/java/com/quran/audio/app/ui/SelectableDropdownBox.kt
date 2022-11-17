@@ -36,13 +36,14 @@ fun SelectableDropdownBox(
                 )
             },
             colors = ExposedDropdownMenuDefaults.textFieldColors(),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().menuAnchor()
         )
-        ExposedDropdownMenu(
+        DropdownMenu(
             expanded = expanded,
             onDismissRequest = {
                 expanded = false
-            }
+            },
+            modifier = Modifier.exposedDropdownSize()
         ) {
             options.forEach { selectionOption ->
                 DropdownMenuItem(
