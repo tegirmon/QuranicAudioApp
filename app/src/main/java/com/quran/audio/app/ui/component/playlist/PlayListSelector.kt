@@ -1,4 +1,4 @@
-package com.quran.audio.app.ui.component
+package com.quran.audio.app.ui.component.playlist
 
 import androidx.compose.runtime.Composable
 import com.quran.audio.app.data.model.PlayListModel

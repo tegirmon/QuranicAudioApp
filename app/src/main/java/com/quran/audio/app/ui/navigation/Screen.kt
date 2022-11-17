@@ -19,9 +19,9 @@ import com.quran.audio.app.R
 import com.quran.audio.app.data.viewmodel.PlayListViewModel
 import com.quran.audio.app.data.viewmodel.ReciterViewModel
 import com.quran.audio.app.data.viewmodel.SuraViewModel
-import com.quran.audio.app.ui.component.PlayList
-import com.quran.audio.app.ui.component.ReciterSelector
-import com.quran.audio.app.ui.component.SuraList
+import com.quran.audio.app.ui.component.playlist.PlayList
+import com.quran.audio.app.ui.component.suralist.ReciterSelector
+import com.quran.audio.app.ui.component.suralist.SuraList
 import com.quran.audio.app.ui.data.MainViewModel
 import com.quran.audio.app.ui.data.ReciterSelected
 import com.quran.audio.app.ui.media.AudioUriParser

@@ -1,4 +1,4 @@
-package com.quran.audio.app.ui.component
+package com.quran.audio.app.ui.component.common
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton

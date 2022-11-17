@@ -1,4 +1,4 @@
-package com.quran.audio.app.ui.component
+package com.quran.audio.app.ui.component.suralist
 
 import androidx.compose.runtime.Composable
 import com.quran.audio.api.client.model.Reciter
