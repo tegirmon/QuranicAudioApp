@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -17,7 +16,6 @@ import com.quran.audio.app.data.viewmodel.ReciterViewModel
 import com.quran.audio.app.data.viewmodel.SuraViewModel
 import com.quran.audio.app.ui.appbar.PlayerBottomBar
 import com.quran.audio.app.ui.appbar.TopBar
-import com.quran.audio.app.ui.data.MainViewModel
 import com.quran.audio.app.ui.media.MediaPlayerActions
 import com.quran.audio.app.ui.navigation.MainNavGraph
 import com.quran.audio.app.ui.navigation.NavActions
@@ -31,8 +29,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val player = ExoPlayer.Builder(applicationContext).build()
         val mediaPlayerActions = MediaPlayerActions(player)
-        val mainViewModel =
-            MainViewModel(DataSource(getString(R.string.quranicaudio_api_url)), mediaPlayerActions)
         val reciterViewModel = ReciterViewModel(DataSource(getString(R.string.quranicaudio_api_url)))
         val suraViewModel = SuraViewModel(DataSource(getString(R.string.quranicaudio_api_url)))
         val playListViewModel = PlayListViewModel()
@@ -43,16 +39,13 @@ class MainActivity : ComponentActivity() {
             QuranicAudioAppTheme {
                 val navController = rememberNavController()
                 val actions = remember(navController) { NavActions(navController) }
-                val reciterSelected by mainViewModel.selectedReciter
-                val suraSelected by mainViewModel.selectedSura
                 Scaffold(
                     topBar = { TopBar(actions, navController) },
-                    bottomBar = { PlayerBottomBar(mediaPlayerActions, reciterSelected, suraSelected) }
+                    bottomBar = { PlayerBottomBar(mediaPlayerActions, playListViewModel) }
                 ) {
                     it.calculateBottomPadding()
                     MainNavGraph(
                         navController,
-                        mainViewModel,
                         mediaPlayerActions,
                         playListViewModel,
                         reciterViewModel,

@@ -36,7 +36,11 @@ fun PlayList(
             items(playList.items) { item ->
                 val reciter = reciterViewModel.getReciter(item.reciterId)
                 val sura = suraViewModel.getSura(item.suraId)
-                PlayListRow(PlayListItemEnriched(item.playListId, sura, reciter, item.order))
+                PlayListRow(
+                    PlayListItemEnriched(item.playListId, sura, reciter, item.order)
+                ) {
+                    playListViewModel.playNow(it)
+                }
             }
         }
     }

@@ -7,13 +7,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.quran.audio.api.client.model.Sura
+import com.quran.audio.app.data.model.SuraModel
 
 @Composable
 fun SuraList(
-    suraList: List<Sura>,
-    selectSura: (sura: Sura) -> Unit,
-    addToPlaylist: (sura: Sura) -> Unit
+    suraList: List<SuraModel>,
+    selectSura: (sura: SuraModel) -> Unit,
+    addToPlaylist: (sura: SuraModel) -> Unit
 ) {
     val context = LocalContext.current
     LazyColumn(

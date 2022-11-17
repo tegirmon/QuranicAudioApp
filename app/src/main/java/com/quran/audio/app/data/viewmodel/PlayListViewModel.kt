@@ -3,9 +3,7 @@ package com.quran.audio.app.data.viewmodel
 import android.util.Log
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
-import com.quran.audio.app.data.model.CurrentPlaylist
-import com.quran.audio.app.data.model.PlayListItemModel
-import com.quran.audio.app.data.model.PlayListModel
+import com.quran.audio.app.data.model.*
 
 class PlayListViewModel(): ViewModel() {
     private val loggerTag = "PlayListViewModel"
@@ -18,6 +16,10 @@ class PlayListViewModel(): ViewModel() {
     private val _currentPlayList = mutableStateOf(CurrentPlaylist())
     val currentPlayList: State<CurrentPlaylist>
         get() = _currentPlayList
+
+    private val _currentPlaying = mutableStateOf(CurrentPlaying())
+    val currentPlaying: State<CurrentPlaying>
+        get() = _currentPlaying
 
     fun createPlayList(name: String) {
         val newId = if(_playLists.isEmpty()) 1 else _playLists.values.last().id + 1
@@ -37,5 +39,9 @@ class PlayListViewModel(): ViewModel() {
 
     fun selectPlayList(item: PlayListModel) {
         _currentPlayList.value = CurrentPlaylist(item)
+    }
+
+    fun playNow(item: PlayListItemEnriched) {
+        _currentPlaying.value = CurrentPlaying(item)
     }
 }

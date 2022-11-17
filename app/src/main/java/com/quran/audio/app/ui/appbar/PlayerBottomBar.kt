@@ -6,12 +6,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
-import com.quran.audio.app.ui.data.ReciterSelected
-import com.quran.audio.app.ui.data.SuraSelected
+import com.quran.audio.app.data.model.CurrentPlaying
+import com.quran.audio.app.data.viewmodel.PlayListViewModel
 import com.quran.audio.app.ui.media.PlayerActions
 import com.quran.audio.app.ui.media.PlayerControls
 import com.quran.audio.app.ui.media.PlayerTitle
@@ -19,13 +20,13 @@ import com.quran.audio.app.ui.media.PlayerTitle
 @Composable
 fun PlayerBottomBar(
     playerActions: PlayerActions,
-    reciterSelected: ReciterSelected,
-    suraSelected: SuraSelected
+    playListViewModel: PlayListViewModel
 ) {
-    val relativePath = reciterSelected.reciter?.relativePath
-    val suraId = suraSelected.sura?.id ?: 0
-    val title = if(reciterSelected.reciter == null || suraSelected.sura == null) "Loading.."
-                else "${reciterSelected.reciter.name} - ${suraSelected.sura.name.simple}"
+    val currentPlaying: CurrentPlaying by playListViewModel.currentPlaying
+    val relativePath = currentPlaying.item?.reciter?.relativePath
+    val suraId = currentPlaying.item?.suraModel?.id ?: 0
+    val title = if(currentPlaying.item == null) "Loading.."
+                else "${currentPlaying.item?.reciter?.name} - ${currentPlaying.item?.suraModel?.name}"
     val borderColor = MaterialTheme.colorScheme.tertiary
     val borderWidth = 4.dp
     Card(

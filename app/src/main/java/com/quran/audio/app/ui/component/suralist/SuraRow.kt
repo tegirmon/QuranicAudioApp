@@ -9,14 +9,14 @@ import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.quran.audio.api.client.model.Sura
+import com.quran.audio.app.data.model.SuraModel
 import com.quran.audio.app.ui.component.common.CustomListItem
 
 @Composable
 fun SuraRow(
-    sura: Sura,
-    onSelect: (Sura) -> Unit,
-    onAdd: (Sura) -> Unit
+    sura: SuraModel,
+    onSelect: (SuraModel) -> Unit,
+    onAdd: (SuraModel) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -31,7 +31,7 @@ fun SuraRow(
         ) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 Column {
-                    CustomListItem(sura.name.simple, sura.name.arabic)
+                    CustomListItem(sura.name, sura.name)
                 }
                 Column {
                     SuraActions(onSelect = { onSelect(sura) }, onAdd = { onAdd(sura) })

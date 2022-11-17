@@ -13,7 +13,7 @@ import com.quran.audio.app.ui.component.common.PlayButton
 
 @ExperimentalMaterialApi
 @Composable
-fun PlayListRow(playListItem: PlayListItemEnriched) {
+fun PlayListRow(playListItem: PlayListItemEnriched, playNow: (item: PlayListItemEnriched) -> Unit) {
     Card(
         modifier = Modifier
             .padding(2.dp)
@@ -36,7 +36,9 @@ fun PlayListRow(playListItem: PlayListItemEnriched) {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.End,
                     ) {
-                        PlayButton {}
+                        PlayButton {
+                            playNow(playListItem)
+                        }
                     }
                 }
             }

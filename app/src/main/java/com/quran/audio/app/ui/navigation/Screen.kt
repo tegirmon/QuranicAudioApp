@@ -16,37 +16,43 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.quran.audio.app.R
+import com.quran.audio.app.data.model.CurrentReciter
+import com.quran.audio.app.data.model.PlayListItemEnriched
 import com.quran.audio.app.data.viewmodel.PlayListViewModel
 import com.quran.audio.app.data.viewmodel.ReciterViewModel
 import com.quran.audio.app.data.viewmodel.SuraViewModel
 import com.quran.audio.app.ui.component.playlist.PlayList
 import com.quran.audio.app.ui.component.suralist.ReciterSelector
 import com.quran.audio.app.ui.component.suralist.SuraList
-import com.quran.audio.app.ui.data.MainViewModel
-import com.quran.audio.app.ui.data.ReciterSelected
 import com.quran.audio.app.ui.media.AudioUriParser
 import com.quran.audio.app.ui.media.MediaPlayerActions
 
 @Composable
-fun Home(viewModel: MainViewModel, mediaPlayerActions: MediaPlayerActions) {
+fun Home(
+    reciterViewModel: ReciterViewModel,
+    suraViewModel: SuraViewModel,
+    playListViewModel: PlayListViewModel,
+    mediaPlayerActions: MediaPlayerActions
+) {
     Column {
-        val selectedReciter: ReciterSelected by viewModel.selectedReciter
-        Log.d("Home", "Home: $selectedReciter")
+        val currentReciter: CurrentReciter by reciterViewModel.currentReciter
+        Log.d("Home", "Home: $currentReciter")
         ReciterSelector(
-            viewModel.reciterList,
-            selectedReciter
+            reciterViewModel.reciterList,
+            currentReciter
         ) { reciter ->
-            viewModel.selectReciter(reciter)
+            reciterViewModel.selectReciter(reciter)
         }
         Spacer(modifier = Modifier.requiredHeight(1.dp))
         SuraList(
-            viewModel.suraList,
-            {
-                viewModel.selectSura(it)
-                val relativePath = selectedReciter.reciter?.relativePath
-                mediaPlayerActions.playPause(AudioUriParser.parse(relativePath, it.id))
+            suraViewModel.suraList,
+            { sura ->
+                currentReciter.reciter?.let { reciter ->
+                    playListViewModel.playNow(PlayListItemEnriched(0, sura, reciter, 0))
+                    mediaPlayerActions.playPause(AudioUriParser.parse(reciter.relativePath, sura.id))
+                }
             },
-            { viewModel.addToPlaylist(it, 0) }
+            {  }
         )
         Spacer(modifier = Modifier.requiredHeight(8.dp))
     }
