@@ -11,6 +11,10 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.android.exoplayer2.ExoPlayer
 import com.quran.audio.app.data.DataSource
+import com.quran.audio.app.data.model.PlayListItemModel
+import com.quran.audio.app.data.viewmodel.PlayListViewModel
+import com.quran.audio.app.data.viewmodel.ReciterViewModel
+import com.quran.audio.app.data.viewmodel.SuraViewModel
 import com.quran.audio.app.ui.appbar.PlayerBottomBar
 import com.quran.audio.app.ui.appbar.TopBar
 import com.quran.audio.app.ui.data.MainViewModel
@@ -29,6 +33,12 @@ class MainActivity : ComponentActivity() {
         val mediaPlayerActions = MediaPlayerActions(player)
         val mainViewModel =
             MainViewModel(DataSource(getString(R.string.quranicaudio_api_url)), mediaPlayerActions)
+        val reciterViewModel = ReciterViewModel(DataSource(getString(R.string.quranicaudio_api_url)))
+        val suraViewModel = SuraViewModel(DataSource(getString(R.string.quranicaudio_api_url)))
+        val playListViewModel = PlayListViewModel()
+        playListViewModel.createPlayList("test")
+        playListViewModel.addToPlayList(1, PlayListItemModel(1, 1, 55, 1))
+        playListViewModel.addToPlayList(1, PlayListItemModel(2, 1, 55, 2))
         setContent {
             QuranicAudioAppTheme {
                 val navController = rememberNavController()
@@ -40,7 +50,14 @@ class MainActivity : ComponentActivity() {
                     bottomBar = { PlayerBottomBar(mediaPlayerActions, reciterSelected, suraSelected) }
                 ) {
                     it.calculateBottomPadding()
-                    MainNavGraph(navController, mainViewModel, mediaPlayerActions)
+                    MainNavGraph(
+                        navController,
+                        mainViewModel,
+                        mediaPlayerActions,
+                        playListViewModel,
+                        reciterViewModel,
+                        suraViewModel
+                    )
                 }
             }
         }
