@@ -33,8 +33,9 @@ class MainActivity : ComponentActivity() {
         val suraViewModel = SuraViewModel(DataSource(getString(R.string.quranicaudio_api_url)))
         val playListViewModel = PlayListViewModel()
         playListViewModel.createPlayList("test")
-        playListViewModel.addToPlayList(1, PlayListItemModel(1, 1, 55, 1))
-        playListViewModel.addToPlayList(1, PlayListItemModel(2, 1, 55, 2))
+        playListViewModel.addToPlayList(1, 6, 55)
+        playListViewModel.addToPlayList(1, 1, 55)
+        playListViewModel.addToPlayList(1, 3, 55)
         setContent {
             QuranicAudioAppTheme {
                 val navController = rememberNavController()

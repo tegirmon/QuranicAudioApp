@@ -1,22 +1,21 @@
 package com.quran.audio.app.ui.component.suralist
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.quran.audio.app.data.model.PlayListModel
 import com.quran.audio.app.data.model.SuraModel
 import com.quran.audio.app.ui.component.common.CustomListItem
 
 @Composable
 fun SuraRow(
     sura: SuraModel,
-    onSelect: (SuraModel) -> Unit,
-    onAdd: (SuraModel) -> Unit
+    onPlay: (SuraModel) -> Unit,
+    onAddTo: (PlayListModel, SuraModel) -> Unit,
+    playLists: List<PlayListModel>
 ) {
     Card(
         modifier = Modifier
@@ -34,7 +33,9 @@ fun SuraRow(
                     CustomListItem(sura.name, sura.name)
                 }
                 Column {
-                    SuraActions(onSelect = { onSelect(sura) }, onAdd = { onAdd(sura) })
+                    SuraActions(playLists, { onPlay(sura) }) { playList ->
+                        onAddTo(playList, sura)
+                    }
                 }
             }
         }

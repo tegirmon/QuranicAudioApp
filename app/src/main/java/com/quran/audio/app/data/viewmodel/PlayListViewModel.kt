@@ -26,10 +26,12 @@ class PlayListViewModel(): ViewModel() {
         _playLists[newId] = PlayListModel(newId, name, emptyList())
     }
 
-    fun addToPlayList(plId: Int, item: PlayListItemModel) {
-        if(_playLists.containsKey(plId)) {
-            _playLists[plId]?.let { playListO ->
-                _playLists[plId] = PlayListModel(plId, playListO.name, playListO.items + item)
+    fun addToPlayList(plId: Int, suraId: Int, reciterId: Int) {
+        if(playLists.containsKey(plId)) {
+            playLists[plId]?.let { playList ->
+                val lastOrder = if(playList.items.isEmpty()) 0 else playList.items.maxWith(Comparator.comparingInt { it.order }).order
+                val item = PlayListItemModel(plId, suraId, reciterId, lastOrder + 1)
+                _playLists[plId] = PlayListModel(plId, playList.name, playList.items + item)
             }
         } else {
             errorMessage = "PlayList doesn't exist"

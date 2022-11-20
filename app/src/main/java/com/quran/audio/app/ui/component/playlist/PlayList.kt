@@ -33,7 +33,7 @@ fun PlayList(
                     Text(text = "Playlist is empty")
                 }
             }
-            items(playList.items) { item ->
+            items(playList.items.sortedBy { it.order }) { item ->
                 val reciter = reciterViewModel.getReciter(item.reciterId)
                 val sura = suraViewModel.getSura(item.suraId)
                 PlayListRow(

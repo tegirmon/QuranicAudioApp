@@ -1,6 +1,5 @@
 package com.quran.audio.app.ui.navigation
 
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -36,7 +35,6 @@ fun Home(
 ) {
     Column {
         val currentReciter: CurrentReciter by reciterViewModel.currentReciter
-        Log.d("Home", "Home: $currentReciter")
         ReciterSelector(
             reciterViewModel.reciterList,
             currentReciter
@@ -52,7 +50,12 @@ fun Home(
                     mediaPlayerActions.playPause(AudioUriParser.parse(reciter.relativePath, sura.id))
                 }
             },
-            {  }
+            { playList, sura ->
+                currentReciter.reciter?.let { reciter ->
+                    playListViewModel.addToPlayList(playList.id, sura.id, reciter.id)
+                }
+            },
+            playListViewModel.playLists.values.toList()
         )
         Spacer(modifier = Modifier.requiredHeight(8.dp))
     }
