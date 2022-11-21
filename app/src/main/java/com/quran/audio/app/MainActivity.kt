@@ -10,7 +10,6 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.android.exoplayer2.ExoPlayer
 import com.quran.audio.app.data.DataSource
-import com.quran.audio.app.data.model.PlayListItemModel
 import com.quran.audio.app.data.viewmodel.PlayListViewModel
 import com.quran.audio.app.data.viewmodel.ReciterViewModel
 import com.quran.audio.app.data.viewmodel.SuraViewModel
@@ -33,9 +32,6 @@ class MainActivity : ComponentActivity() {
         val suraViewModel = SuraViewModel(DataSource(getString(R.string.quranicaudio_api_url)))
         val playListViewModel = PlayListViewModel()
         playListViewModel.createPlayList("test")
-        playListViewModel.addToPlayList(1, 6, 55)
-        playListViewModel.addToPlayList(1, 1, 55)
-        playListViewModel.addToPlayList(1, 3, 55)
         setContent {
             QuranicAudioAppTheme {
                 val navController = rememberNavController()

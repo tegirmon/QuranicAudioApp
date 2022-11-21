@@ -31,7 +31,7 @@ fun MainNavGraph(
             Home(reciterViewModel, suraViewModel, playListViewModel, mediaPlayerActions)
         }
         composable(Screen.PlayList.route) {
-            PlayListView(playListViewModel, reciterViewModel, suraViewModel)
+            PlayListView(playListViewModel, mediaPlayerActions)
         }
     }
 }

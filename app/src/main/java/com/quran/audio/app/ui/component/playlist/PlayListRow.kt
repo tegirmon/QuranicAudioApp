@@ -27,7 +27,7 @@ fun PlayListRow(playListItem: PlayListItemEnriched, playNow: (item: PlayListItem
             Row(modifier = Modifier.fillMaxWidth()) {
                 Column {
                     CustomListItem(
-                        "${playListItem.order}. ${playListItem.suraModel.name}",
+                        "${playListItem.order}. ${playListItem.sura.name}",
                         playListItem.reciter.name
                     )
                 }

@@ -41,8 +41,6 @@ class ReciterViewModel(private val dataSource: DataSource): ViewModel() {
         }
     }
 
-    fun getReciter(id: Int): ReciterModel = reciterList.first { it.id == id }
-
     fun selectReciter(reciter: ReciterModel) {
         _currentReciter.value = CurrentReciter(reciter)
     }

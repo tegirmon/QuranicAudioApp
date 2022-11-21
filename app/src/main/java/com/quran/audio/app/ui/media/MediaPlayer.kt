@@ -31,7 +31,7 @@ fun PlayerTitle(title: String) {
 }
 
 @Composable
-fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, suraId: Int) {
+fun PlayerControls(playerActions: PlayerActions) {
     val playButtonSize = 64.dp
     val buttonSize = 48.dp
     Column(Modifier.fillMaxWidth()) {
@@ -62,7 +62,7 @@ fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, s
                 )
             }
             IconButton(
-                onClick = { playerActions.playPause(AudioUriParser.parse(reciterRelativePath, suraId)) },
+                onClick = { playerActions.playPause() },
                 Modifier
                     .size(playButtonSize)
                     .align(Alignment.Bottom),
@@ -107,10 +107,12 @@ fun PlayerControls(playerActions: PlayerActions, reciterRelativePath: String?, s
 
 interface PlayerActions {
     fun isPlaying(): Boolean
-    fun playPause(audioUrl: String)
+    fun playPause()
     fun forward10()
     fun replay10()
     fun skipNext()
     fun skipPrevious()
     fun stop()
+    fun addToPlaylist(audioUrlList: List<String>)
+    fun play(index: Int = 0)
 }

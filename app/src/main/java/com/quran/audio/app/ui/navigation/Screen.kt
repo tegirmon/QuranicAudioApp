@@ -47,12 +47,13 @@ fun Home(
             { sura ->
                 currentReciter.reciter?.let { reciter ->
                     playListViewModel.playNow(PlayListItemEnriched(0, sura, reciter, 0))
-                    mediaPlayerActions.playPause(AudioUriParser.parse(reciter.relativePath, sura.id))
+                    mediaPlayerActions.addToPlaylist(listOf(AudioUriParser.parse(reciter.relativePath, sura.id)))
+                    mediaPlayerActions.play()
                 }
             },
             { playList, sura ->
                 currentReciter.reciter?.let { reciter ->
-                    playListViewModel.addToPlayList(playList.id, sura.id, reciter.id)
+                    playListViewModel.addToPlayList(playList.id, sura, reciter)
                 }
             },
             playListViewModel.playLists.values.toList()
@@ -66,11 +67,10 @@ fun Home(
 @Composable
 fun PlayListView(
     viewModel: PlayListViewModel,
-    reciterViewModel: ReciterViewModel,
-    suraViewModel: SuraViewModel
+    mediaPlayerActions: MediaPlayerActions
 ) {
     Column {
-        PlayList(viewModel, reciterViewModel, suraViewModel)
+        PlayList(viewModel, mediaPlayerActions)
         Spacer(modifier = Modifier.requiredHeight(8.dp))
     }
 }

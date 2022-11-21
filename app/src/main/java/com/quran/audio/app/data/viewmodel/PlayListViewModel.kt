@@ -26,11 +26,11 @@ class PlayListViewModel(): ViewModel() {
         _playLists[newId] = PlayListModel(newId, name, emptyList())
     }
 
-    fun addToPlayList(plId: Int, suraId: Int, reciterId: Int) {
+    fun addToPlayList(plId: Int, sura: SuraModel, reciter: ReciterModel) {
         if(playLists.containsKey(plId)) {
             playLists[plId]?.let { playList ->
                 val lastOrder = if(playList.items.isEmpty()) 0 else playList.items.maxWith(Comparator.comparingInt { it.order }).order
-                val item = PlayListItemModel(plId, suraId, reciterId, lastOrder + 1)
+                val item = PlayListItemEnriched(plId, sura, reciter, lastOrder + 1)
                 _playLists[plId] = PlayListModel(plId, playList.name, playList.items + item)
             }
         } else {

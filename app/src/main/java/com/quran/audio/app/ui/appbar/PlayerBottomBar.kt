@@ -23,10 +23,8 @@ fun PlayerBottomBar(
     playListViewModel: PlayListViewModel
 ) {
     val currentPlaying: CurrentPlaying by playListViewModel.currentPlaying
-    val relativePath = currentPlaying.item?.reciter?.relativePath
-    val suraId = currentPlaying.item?.suraModel?.id ?: 0
     val title = if(currentPlaying.item == null) "Loading.."
-                else "${currentPlaying.item?.reciter?.name} - ${currentPlaying.item?.suraModel?.name}"
+                else "${currentPlaying.item?.reciter?.name} - ${currentPlaying.item?.sura?.name}"
     val borderColor = MaterialTheme.colorScheme.tertiary
     val borderWidth = 4.dp
     Card(
@@ -47,7 +45,7 @@ fun PlayerBottomBar(
         Column(Modifier.padding(12.dp)) {
             PlayerTitle(title)
             Spacer(Modifier.height(16.dp))
-            PlayerControls(playerActions, relativePath, suraId)
+            PlayerControls(playerActions)
         }
     }
 }

@@ -19,20 +19,24 @@ class MediaPlayerActions(private val player: ExoPlayer) : PlayerActions {
         _isPlaying.value = false
     }
 
-    override fun playPause(audioUrl: String) {
+    override fun addToPlaylist(audioUrlList: List<String>) {
+        player.setMediaItems(audioUrlList.map(this::mediaItemFromAudioUrl))
+        player.prepare()
+    }
+
+    override fun playPause() {
         if(isPlaying()) {
             player.pause()
         } else {
-            Log.d(logTag, audioUrl)
-            val mediaItem: MediaItem = MediaItem.Builder()
-                .setUri(audioUrl)
-                .setMimeType(MimeTypes.AUDIO_MPEG)
-                .build()
-            player.setMediaItem(mediaItem)
-            player.prepare()
             player.play()
         }
-        _isPlaying.value = !_isPlaying.value
+        _isPlaying.value = !isPlaying()
+    }
+
+    override fun play(index: Int) {
+        player.seekTo(index, 0L)
+        player.play()
+        _isPlaying.value = true
     }
 
     override fun forward10() {
@@ -62,4 +66,6 @@ class MediaPlayerActions(private val player: ExoPlayer) : PlayerActions {
             player.seekToPrevious()
         }
     }
+
+    private fun mediaItemFromAudioUrl(audioUrl: String): MediaItem = MediaItem.Builder().setUri(audioUrl).setMimeType(MimeTypes.AUDIO_MPEG).build()
 }
